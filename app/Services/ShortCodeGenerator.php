@@ -11,7 +11,7 @@ class ShortCodeGenerator
     private const DEFAULT_LENGTH = 6;
 
 
-    // Генерация уникального короткого кода
+    // Генерация уникального короткого кода (ссылки)
 
     public function generate(int $length = self::DEFAULT_LENGTH): string
     {
@@ -22,7 +22,7 @@ class ShortCodeGenerator
         return $code;
     }
 
-    // Проверка существования кода в БД
+    // Проверка существования кода (ссылки) в БД
 
     protected function exists(string $code): bool
     {
