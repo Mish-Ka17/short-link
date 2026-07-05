@@ -7,14 +7,12 @@ use Illuminate\Support\Str;
 
 class ShortCodeGenerator
 {
-    /**
-     * Длина короткого кода.
-     */
+
     private const DEFAULT_LENGTH = 6;
 
-    /**
-     * Генерирует уникальный короткий код.
-     */
+
+    // Генерация уникального короткого кода
+
     public function generate(int $length = self::DEFAULT_LENGTH): string
     {
         do {
@@ -24,9 +22,8 @@ class ShortCodeGenerator
         return $code;
     }
 
-    /**
-     * Проверяет существование кода в базе.
-     */
+    // Проверка существования кода в БД
+
     protected function exists(string $code): bool
     {
         return ShortLink::where('short_code', $code)->exists();

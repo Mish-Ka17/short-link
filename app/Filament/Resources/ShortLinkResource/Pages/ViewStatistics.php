@@ -34,7 +34,12 @@ class ViewStatistics extends Page implements HasTable
     {
         return 'Просмотр статистики ссылки';
     }
-
+    public function getBreadcrumbs(): array
+    {
+        return [
+            ShortLinkResource::getUrl() => 'Список ссылок','Просмотр статистики ссылки',
+        ];
+    }
     public function table(Table $table): Table
     {
         return $table
@@ -49,12 +54,12 @@ class ViewStatistics extends Page implements HasTable
             ->columns([
 
                 Tables\Columns\TextColumn::make('ip_address')
-                    ->label('IP')
+                    ->label('IP-адрес')
                     ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('clicked_at')
-                    ->label('Дата')
+                    ->label('Дата перехода по ссылке')
                     ->dateTime('d.m.Y H:i:s')
                     ->sortable(),
 

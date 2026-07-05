@@ -12,9 +12,9 @@ class RedirectController extends Controller
     public function __construct(
         private StatisticsService $statistics
     ) { }
-    /**
-     * Переход по короткой ссылке.
-     */
+
+    // Переход по короткой ссылке.
+
     public function __invoke(Request $request, string $code): RedirectResponse
     {
         $shortLink = ShortLink::where('short_code', $code)
@@ -26,7 +26,7 @@ class RedirectController extends Controller
             $shortLink->expires_at !== null &&
             $shortLink->expires_at->isPast()
         ) {
-            abort(410, 'Срок действия ссылки истёк.');
+            abort(410);
         }
 
         // Сохраняем статистику

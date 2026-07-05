@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class StatisticsService
 {
-    /**
-     * Сохраняет информацию о переходе.
-     */
+    // Сохраняет информацию о переходе в БД.
+
     public function store(
         ShortLink $shortLink,
         Request $request

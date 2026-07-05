@@ -30,7 +30,10 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->profile()
             ->sidebarFullyCollapsibleOnDesktop()
-            ->brandName('SHORT LINKS')
+            ->sidebarWidth('230px')
+            ->collapsedSidebarWidth('72px')
+            ->brandLogo(asset('img/short-link.png'))
+            ->brandLogoHeight('50px')
             ->colors([
                 'primary' => Color::Green,
             ])

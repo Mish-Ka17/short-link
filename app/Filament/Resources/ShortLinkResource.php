@@ -33,6 +33,7 @@ class ShortLinkResource extends Resource
 
     protected static ?string $modelLabel = 'Короткая ссылка';
 
+    // выбор пользователя
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -72,20 +73,23 @@ class ShortLinkResource extends Resource
 
                 TextColumn::make('title')
                     ->label('Название')
+                    ->limit(10)
+                    ->tooltip(fn ($record) => $record->title)
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('original_url')
                     ->label('Оригинальный URL')
-                    ->limit(20)
+                    ->limit(40)
                     ->tooltip(fn ($record) => $record->original_url)
+                    ->sortable()
                     ->searchable(),
 
-                TextColumn::make('short_code')
-                    ->label('Код')
-                    ->copyable()
-                    ->url(fn ($record) => $record->short_url)
-                    ->openUrlInNewTab(),
+                // TextColumn::make('short_code')
+                //     ->label('Код')
+                //     ->copyable()
+                //     ->url(fn ($record) => $record->short_url)
+                //     ->openUrlInNewTab(),
 
                 TextColumn::make('short_url')
                     ->label('Короткая ссылка')
@@ -108,6 +112,7 @@ class ShortLinkResource extends Resource
                     ->label('Создана')
                     ->limit(10)
                     ->sortable()
+                    ->searchable()
                     ->tooltip(fn ($record) => $record->created_at->format('d.m.Y H:i:s'))
                     ->dateTime('d.m.Y H:i'),
 
@@ -116,9 +121,17 @@ class ShortLinkResource extends Resource
             ])
             ->actions([
 
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Редактировать'),
 
-                Tables\Actions\DeleteAction::make(),
+
+
+                Tables\Actions\DeleteAction::make()
+                    ->label('Удалить')
+                    ->modalHeading('Удаление ссылки')
+                    ->modalDescription('Вы действительно хотите удалить эту короткую ссылку? Это действие необратимо!')
+                    ->modalSubmitActionLabel('Удалить')
+                    ->modalCancelActionLabel('Отмена'),
 
                 Tables\Actions\Action::make('statistics')
                         ->label('Статистика')
